@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
+import { authService } from '@/lib/auth';
 export default function Accounts() {
     const [form, setForm] = useState({
         email: '',
@@ -16,6 +17,10 @@ export default function Accounts() {
     function handleSubmit(e) {
         e.preventDefault();
         // Aquí iría la lógica para enviar el formulario al backend
+        const data = authService.login(form);
+        if (data.acces_token) {
+            router.push('/app'); 
+        }
         console.log('Formulario enviado:', form);
     }
 
@@ -98,8 +103,16 @@ export default function Accounts() {
                     <div className="flex flex-col gap-2 items-center"> 
                         <p className="text-sm">Iniciar sesión con</p>
                         <div className="flex gap-2">
-                            <FaGoogle  className="text-2xl text-[var(--accent)]"/>
-                            <FaFacebookF  className="text-2xl text-[var(--accent)]"/>
+                            <button onClick={() => authService.loginWithGoogle()}
+                                    className="rounded-xl py-2">
+                                <FaGoogle  className="text-2xl text-[var(--accent)]"/>
+                            </button>
+                            {/* 
+                            <button onClick={() => authService.loginWithFacebook()}
+                                    className="rounded-xl py-2">
+                                <FaFacebookF  className="text-2xl text-[var(--accent)]"/>
+                            </button>
+                            */}                            
                         </div>
                     </div>
 
