@@ -5,6 +5,8 @@ import CalcCetes from '../../components/Dashboard/CalcCetes';
 import CalcDeuda from '../../components/Dashboard/CalcDeuda';
 import CalcAfore from '../../components/Dashboard/CalcAfore';
 import Comparador from '../../components/Dashboard/Comparador';
+import Modal from '../../components/Modal';
+import { useRouter } from "next/navigation";
 
 const calcs = [
   { id: 'cetes',      label: 'CETES vs Inflación'    },
@@ -14,10 +16,28 @@ const calcs = [
 ]
 
 export default function Dashboard() {
-  const [calc, setCalc] = useState('cetes')
+  const [calc, setCalc] = useState('cetes');
+  const [modalOpen, setModalOpen] = useState(true);
+  const router = useRouter();
+  const handleLogin = ()=>{
+    router.push(`/app/accounts`)
+  };
 
   return (
     <div className="max-w-7xl mx-0 px-10">
+      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+        <div className='bg-white max-w-2xl w-6xl flex justify-center flex-col items-center gap-6 p-6 pt-2'>
+          <h2 className='text-lg font-bold text-center'>Bienvenido al Simulador Financiero</h2>
+          <p className='text-center w-11/12'>
+            Este simulador te permite ajustar variables financieras clave y analizar los resultados para tomar decisiones informadas sobre tus finanzas personales. 
+          </p>
+          <div className='mt-2 flex gap-5'>
+            <button className='w-36 text-sm border border-[var(--accentL)] bg-[var(--accent)] hover:bg-[var(--bg)] hover:text-black transition duration-700 ease-in-out text-white   rounded-xl p-1' onClick={handleLogin}>Iniciar Sesión</button>
+            <button className='w-36  text-sm border border-[var(--accentL)] bg-[var(--accent)] hover:bg-[var(--bg)] hover:text-black transition duration-700 ease-in-out text-white rounded-xl p-1' onClick={()=>setModalOpen(false)}>Continuar como invitado</button>
+          </div>
+
+        </div>
+      </Modal>
 
       {/* Header */}
       <div className="pt-6 pb-5 flex justify-between items-end border-b border-[var(--divider)]">
