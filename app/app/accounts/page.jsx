@@ -3,7 +3,10 @@ import { useState } from 'react';
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
 import { authService } from '@/lib/auth';
+import { useAuth} from '../../../providers/AuthProvider';
+
 export default function Accounts() {
+    const { login } = useAuth();
     const [form, setForm] = useState({
         email: '',
         password: '',
@@ -17,10 +20,12 @@ export default function Accounts() {
     function handleSubmit(e) {
         e.preventDefault();
         // Aquí iría la lógica para enviar el formulario al backend
-        const data = authService.login(form);
+        /*const data = authService.login(form);
+
         if (data.acces_token) {
             router.push('/app'); 
-        }
+        }*/
+       login(form);
         console.log('Formulario enviado:', form);
     }
 
@@ -90,6 +95,7 @@ export default function Accounts() {
                         <button
                             type="submit"
                             className="mt-1 bg-[var(--accent)] text-white py-2.5 rounded-xl font-semibold hover:opacity-90 transition"
+                            onClick={handleSubmit}
                         >
                             Iniciar sesión
                         </button>
