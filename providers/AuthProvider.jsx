@@ -34,6 +34,8 @@ export const AuthProvider = ({ children }) => {
             name: user.name
         });
 
+        router.push('/app');
+
     };
 
     const value = {
