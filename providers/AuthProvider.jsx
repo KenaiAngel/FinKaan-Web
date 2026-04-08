@@ -27,7 +27,16 @@ export const AuthProvider = ({ children }) => {
             credentials: "include" // 🔥 necesario
         });
 
+
+        
+        if (!res.ok) {
+            console.error("Error en login", res.status);
+            return;
+        }
+
         const user = await res.json();
+
+        console.log("USER:", user); // 👈 DEBUG
 
         setUser({
             id: user.user_id,
