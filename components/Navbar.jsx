@@ -13,6 +13,7 @@ const appLinks = [
 
 const hiddeRouts = [
   '/app/accounts',
+  '/app/accounts/register'
 ];
 
 export default function Navbar() {

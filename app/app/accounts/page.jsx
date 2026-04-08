@@ -4,9 +4,11 @@ import { FaGoogle } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
 import { authService } from '@/lib/auth';
 import { useAuth} from '../../../providers/AuthProvider';
+import { useRouter } from "next/navigation";
 
 export default function Accounts() {
     const { login } = useAuth();
+    const router = useRouter();
     const [form, setForm] = useState({
         email: '',
         password: '',
@@ -69,7 +71,7 @@ export default function Accounts() {
                         <label htmlFor="email" className="flex flex-col text-sm text-[var(--txtSec)] gap-1">
                             Correo electrónico
                             <input
-                            className="px-3 py-2 bg-[var(--card2)] border border-[var(--divider)] rounded-lg text-[var(--txt)] outline-none focus:border-[var(--accent)] transition"
+                            className="px-3 py-2  border border-[var(--divider)] rounded-lg text-[var(--txt)] outline-none focus:border-[var(--accent)] transition"
                             type="text"
                             id="email"
                             name="email"
@@ -82,7 +84,7 @@ export default function Accounts() {
                         <label htmlFor="password" className="flex flex-col text-sm text-[var(--txtSec)] gap-1">
                             Contraseña
                             <input
-                            className="px-3 py-2 bg-[var(--card2)] border border-[var(--divider)] rounded-lg text-[var(--txt)] outline-none focus:border-[var(--accent)] transition"
+                            className="px-3 py-2 border border-[var(--divider)] rounded-lg text-[var(--txt)] outline-none focus:border-[var(--accent)] transition"
                             type="password"
                             id="password"
                             name="password"
@@ -102,7 +104,7 @@ export default function Accounts() {
 
                     </form>
 
-                    <button className="border border=[var(--accent)] rounded-xl py-2">
+                    <button className="border border=[var(--accent)] rounded-xl py-2" onClick={()=>{router.push('/app/accounts/register')}}>
                         Crear Cuenta
                     </button>
 

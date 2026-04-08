@@ -18,25 +18,22 @@ export const AuthProvider = ({ children }) => {
     const router = useRouter();
 
     const login = async (data) => {
+        
         const res = await fetch(`${API_URL}/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(data),
-            credentials: "include" // 🔥 necesario
+            credentials: "include" 
         });
 
-
-        
         if (!res.ok) {
             console.error("Error en login", res.status);
             return;
         }
 
         const user = await res.json();
-
-        console.log("USER:", user); // 👈 DEBUG
 
         setUser({
             id: user.user_id,
@@ -46,6 +43,10 @@ export const AuthProvider = ({ children }) => {
         router.push('/app');
 
     };
+
+    const signup = async(data)=>{
+
+    }
 
     const value = {
         login
